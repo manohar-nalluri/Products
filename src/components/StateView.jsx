@@ -90,6 +90,7 @@ const StateView = ({state}) => {
   let counter=1
   return (
     <>
+    {/* This is for showing image selector*/}
     <div className='center-middle h-2/4'>
       <UpdateImage value={showImageSelector} handleClose={handleClose} handleInsert={handleInsert}/>
     </div>
@@ -101,11 +102,14 @@ const StateView = ({state}) => {
         <th className='sticky left-0 bg-gray-100' width="100"> </th>
         <th className='sticky left-24 bg-gray-100' width="200"><div className='h-20 w-80 flex items-center justify-center'>Product Filter</div></th>
 
+        {/* Variant headers are generate Variant1,2,3......*/}
         {[...Array(noOfRows)].map((_,i)=>{
           return i+1==1?<th width="100">Primary Variant</th>:<th width="100">Variant {i+1}</th>
         })}
       </tr>
     </thead>
+    
+
     <tbody>
       {data.map((item)=>{
         return (<tr align="center" key={item.id} className={`${movingItem.current==item.id?"opacity-0":""}`} onMouseEnter={()=>handleHover(item.id)} onMouseLeave={()=>setHoveredItem(null)} draggable={isDraggable==item.id?true:false} onDragStart={(e)=>handleDragStart(e,item.id)} onDragOver={(e)=>{e.preventDefault();handleDragOver(e)}} onDragEnter={(e)=>handleDragEnter(item.id)} onDragEnd={handleDragEnd} >
@@ -119,7 +123,7 @@ const StateView = ({state}) => {
             </button></div>
             </div></div>
           </td>
-          <td className='sticky left-24  bg-gray-100' width="200"><div className='bg-white h-36 w-80 flex justify-center items-center mx-8 rounded-md' >{item.productRules??<button className='bg-gray-100 px-4 rounded-md flex items-center justify-center shadow-black-500'><IoIosAdd size='24'/> Add Rules</button>}</div></td>
+          <td className='sticky left-24  bg-gray-100' width="200"><div className='bg-white h-36 w-80 flex flex-wrap overflow-hidden justify-center items-center mx-8 rounded-md' >{item.productRules?item.productRules.map((eachRule,i)=>{ return <div className='mx-1 px-1 bg-gray-200 rounded-md max-w-full overflow-hidden text-ellipsis whitespace-nowrap'>{eachRule}</div>}):<button className='bg-gray-100 px-4 rounded-md flex items-center justify-center shadow-black-500'><IoIosAdd size='24'/> Add Rules</button>}</div></td>
           {item.variants.map((variant,index)=>{
           return <td className='border-r-2'>
           <div className="bg-white h-36 w-36 flex justify-center items-center mx-5 rounded-md">{variant?<div className='flex flex-col justify-center items-center'><img className='h-28 w-28 object-contain' src={`./${variant.img}`} alt={variant.name} /><p className='truncate w-28'>{variant.name}</p></div>:<button className='flex items-center' onClick={()=>{setShowImageSelector(true);setRowId(item.id);setVariantsId(index)}}><IoIosAdd /> Add Variant</button>}</div>
