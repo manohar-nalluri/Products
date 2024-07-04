@@ -1,5 +1,4 @@
 import { useEffect  } from 'react'
-import './App.css'
 import useToast from './hooks/useToast'
 import StateView from './components/StateView';
 
