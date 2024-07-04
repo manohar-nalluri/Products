@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import '../components/notification.css'
-
+import { IoIosClose , IoIosAdd} from "react-icons/io";
 //Products images harcoded values but can get from api
-const products=[
+export const products=[
   {img:'1.png',name:"single image Buy 1 Get 1"},
   {img:'2.png',name:"single image Buy 2 Get 1"},
   {img:'3.png',name:"multi img Baby Product sale"},
@@ -17,7 +17,6 @@ const products=[
   {img:'12.png',name:"casual wear"},
 ]
 
-import { IoIosClose , IoIosAdd} from "react-icons/io";
 const UpdateImage = ({value,handleClose,handleInsert}) => {
  
 const [showInsert,setShowInsert]=useState(null)
